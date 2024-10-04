@@ -22,10 +22,32 @@ class LinkedList implements ListInterface
         return json_encode($this->toArray(), JSON_PRETTY_PRINT);
     }
 
-    public function push(mixed $element): void {}
+    public function push(mixed $element): void
+    {
 
-    public function get(int $index): mixed {}
+        if ($this->size === 0) {
+            $this->head->setElement($element);
+        } else {
+            $newNode = new Node($element);
+            $current = $this->head;
 
+            while ($current->getNext() !== null) {
+                $current = $current->getNext();
+            }
+
+            $current->setNext($newNode);
+        }
+        $this->size++;
+    }
+
+    public function get(int $index): mixed
+    {
+        $current = $this->head;
+        for ($i = 0; $i < $index; $i++) {
+            $current = $current->getNext();
+        }
+        return $current->getElement();
+    }
     public function set(int $index, mixed $element): void {}
 
     public function clear(): void {}
@@ -38,7 +60,19 @@ class LinkedList implements ListInterface
 
     public function remove(int $index): void {}
 
-    public function size(): int {}
+    public function size(): int
+    {
+        return $this->size;
+    }
 
-    public function toArray(): array {}
+    public function toArray(): array
+    {
+        $current = $this->head;
+        $array[] = $current->getElement();
+        while ($current->getNext() !== null) {
+            $current = $current->getNext();
+            $array[] = $current->getElement();
+        }
+        return $array;
+    }
 }

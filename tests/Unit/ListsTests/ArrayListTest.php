@@ -121,7 +121,7 @@ describe('ArrayList', function () {
 
 
     it('should throw exception when set index not found', function () {
-        $collection = new \Opmvpc\StructuresDonnees\Lists\Collection();
+        $collection = new \Opmvpc\StructuresDonnees\Lists\ArrayList();
         $collection->set(0, 1);
     })->throws(\Exception::class);
 
